@@ -20,6 +20,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'social_id',
+        'social_type'
     ];
 
     /**
@@ -30,6 +32,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'two_factor_recovery_codes',
+        'two_factor_secret',
     ];
 
     /**
@@ -40,4 +44,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class, 'receiver_id');
+    }
 }
